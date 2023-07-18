@@ -1,4 +1,6 @@
 #!/bin/sh
+# Simple imitation of systemctl command for OpenRC users
+
 echo "$0" "$@"
 CMD="$1"
 SERVICE="$2"

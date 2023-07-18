@@ -1,4 +1,5 @@
 #!/bin/bash
+# Copies package directory from portage tree to local overlay (Gentoo)
 
 PORTAGE_ROOT=/usr/portage
 LOCAL_OVERLAY_ROOT=/usr/local/portage

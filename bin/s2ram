@@ -1,4 +1,6 @@
 #!/bin/sh
+# Trivial suspend-to-RAM implementation bypassing elogind
+
 /usr/bin/nvidia-sleep.sh suspend
 echo mem > /sys/power/state
 /usr/bin/nvidia-sleep.sh resume
