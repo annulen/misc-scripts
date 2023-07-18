@@ -1,0 +1,4 @@
+#!/bin/sh
+REPO="$1"
+shift
+exec gh repo clone "$REPO" -- --depth=1 "$@"
