@@ -1,0 +1,28 @@
+#!/bin/bash
+# Creates local patch file (Gentoo)
+
+PATCHES_ROOT=/etc/portage/patches
+
+function die() {
+    echo "Error:" "$@"
+    exit 1
+}
+
+PACKAGE_NAME="$1"
+[[ -n "$PACKAGE_NAME" ]] || die "package name is missing"
+[[ "$PACKAGE_NAME" == */* ]] || die "package name must contain '/'"
+
+PATCH_DIR="$PATCHES_ROOT/$PACKAGE_NAME"
+if [[ ! -d "$PATCH_DIR" ]]; then
+    mkdir -p "$PATCH_DIR" || die "failed to mkdir '$PATCH_DIR'"
+fi
+
+PATCH_NAME="$2"
+[[ -n "$PATCH_NAME" ]] || die "patch name is missing"
+
+PATCH_PATH="$PATCH_DIR/$PATCH_NAME"
+[[ -e "$PATCH_PATH" ]] && die "'$PATCH_PATH' already exists"
+
+echo "$PATCH_PATH"
+echo "$(</dev/stdin)" > "$PATCH_PATH"
+cat "$PATCH_PATH"
