@@ -1,0 +1,25 @@
+#!/bin/bash
+
+PORTAGE_ROOT=/usr/portage
+LOCAL_OVERLAY_ROOT=/usr/local/portage
+
+function die() {
+    echo "Error:" "$@"
+    exit 1
+}
+
+PACKAGE_NAME="$1"
+[[ -n "$PACKAGE_NAME" ]] || die "package name is missing"
+[[ "$PACKAGE_NAME" == */* ]] || die "package name must contain '/'"
+
+PACKAGE_PATH="$PORTAGE_ROOT/$PACKAGE_NAME"
+[[ -d "$PACKAGE_PATH" ]] || die "directory '$PACKAGE_PATH' doesn't exist"
+
+LOCAL_PACKAGE_PATH="$LOCAL_OVERLAY_ROOT/$PACKAGE_NAME"
+[[ -e "$LOCAL_PACKAGE_PATH" ]] && die "'$LOCAL_PACKAGE_PATH' already exists"
+
+mkdir -p "$LOCAL_PACKAGE_PATH"
+cp -ax "$PACKAGE_PATH"/* "$LOCAL_PACKAGE_PATH"/
+
+echo "$LOCAL_PACKAGE_PATH"
+ls -la "$LOCAL_PACKAGE_PATH"

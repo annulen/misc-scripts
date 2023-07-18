@@ -1,0 +1,6 @@
+#!/bin/sh
+echo "$0" "$@"
+CMD="$1"
+SERVICE="$2"
+echo "CMD=$CMD SERVICE=$SERVICE"
+rc-service "$SERVICE" "$CMD"

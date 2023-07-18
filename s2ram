@@ -1,0 +1,4 @@
+#!/bin/sh
+/usr/bin/nvidia-sleep.sh suspend
+echo mem > /sys/power/state
+/usr/bin/nvidia-sleep.sh resume

@@ -1,0 +1,4 @@
+#!/bin/sh
+sysctl kernel.task_delayacct=1
+/usr/bin/iotop
+sysctl kernel.task_delayacct=0

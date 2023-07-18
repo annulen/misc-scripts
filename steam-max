@@ -1,0 +1,2 @@
+#!/bin/sh
+exec steam +open steam://open/largegameslist

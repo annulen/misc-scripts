@@ -1,0 +1,3 @@
+#!/bin/sh
+export LC_NUMERIC=C
+exec /usr/bin/gnumeric "$@"
