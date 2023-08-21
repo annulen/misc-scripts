@@ -1,0 +1,2 @@
+#!/bin/sh
+eix-diff -F | perl -mText::ANSI::Util=ta_strip -ne 'ta_strip($_) =~ /^\[U\] / && print'
