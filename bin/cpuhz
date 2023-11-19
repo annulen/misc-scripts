@@ -1,0 +1,32 @@
+#!/usr/bin/env perl
+
+use strict;
+use warnings;
+
+my $info_by_core = [];
+
+open my $cpuinfo, '<', '/proc/cpuinfo';
+
+my ($cpu_id, $core_id, $hz);
+for (<$cpuinfo>) {
+    ($_, my $v) = split /: /;
+    chomp $v if defined($v);
+    if (/^processor/) { $cpu_id = $v };
+    if (/^core id/)   { $core_id = $v };
+    if (/^cpu MHz/)   { $hz = $v };
+    if (/^\s*$/) {
+        $info_by_core->[$core_id]{$cpu_id} = $hz;
+        ($cpu_id, $core_id, $hz) = ();
+    };
+}
+
+print "Core\tProc\tMHz\n";
+for my $i (0..$#$info_by_core) {
+    my $info = $info_by_core->[$i];
+    my $j = 0;
+    while (my($cpu_id, $hz) = each %$info) {
+        print $i if ($j < 1);
+        print "\t$cpu_id\t$hz\n";
+        $j = 1;
+    }
+}
