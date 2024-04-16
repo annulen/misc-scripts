@@ -1,0 +1,5 @@
+#!/bin/sh
+PREFIX="$1"
+shift
+set -x
+tar -cf "$PREFIX.tar" --transform "s,^,$PREFIX/," "$@"
