@@ -1,0 +1,16 @@
+#!/usr/bin/env perl
+
+use strict;
+use warnings;
+
+print "Old ARGV = @ARGV\n";
+@ARGV = map { $_ eq '--hess' ? qw(--bhess vtight)
+                             : $_
+            } @ARGV;
+# FIXME
+push @ARGV, qw(--alpb chcl3);
+
+print "New ARGV = @ARGV\n";
+
+my @args = ('/opt/xtb/bin/xtb', @ARGV);
+exec { $args[0] } @args or die "$!";
