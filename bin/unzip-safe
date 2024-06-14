@@ -1,0 +1,15 @@
+#!/usr/bin/env perl
+
+use File::Basename;
+
+use strict;
+use warnings;
+
+for my $f (@ARGV) {
+    my ($name, $path, $suffix) = fileparse($f, '.zip');
+    warn "$f has no .zip suffix" if !$suffix;
+    my $cmd = "unzip '$f' -d '$name'";
+    print "$cmd\n";
+    system($cmd) == 0 or die "unzip exited with $?";
+}
+
