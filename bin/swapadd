@@ -1,0 +1,5 @@
+#!/bin/sh -ex
+fallocate -l "$1" "$2"
+chmod 600 "$2"
+mkswap "$2"
+swapon "$2"
