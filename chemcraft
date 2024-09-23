@@ -1,0 +1,13 @@
+#!/usr/bin/env perl
+
+use File::Spec::Functions qw(rel2abs);
+use strict;
+use warnings;
+
+my $CCDIR = "/mnt/storage/Chemcraft_b638l_lin64";
+
+my @CCARGV = map { rel2abs($_) } @ARGV;
+unshift @CCARGV, "$CCDIR/Chemcraft";
+
+print "@CCARGV\n";
+exec { $CCARGV[0] } @CCARGV;
