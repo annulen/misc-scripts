@@ -9,4 +9,4 @@ my @args = map { $_ eq '-print'
 } @ARGV;
 
 print "Running 'find @args\n\n'";
-exec {'find'} @args;
+exec 'find', @args;
