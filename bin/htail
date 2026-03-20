@@ -1,0 +1,67 @@
+#!/usr/bin/env perl
+
+use Getopt::Long;
+use Pod::Usage;
+
+use strict;
+use warnings;
+
+my @lines;
+my $max_lines = 10;
+
+exit main();
+
+sub store_line {
+    shift @lines if @lines == $max_lines;
+    push @lines, shift;
+}
+
+sub main {
+    Getopt::Long::Configure("bundling");
+    GetOptions ("lines|n=i" => \$max_lines) or pod2usage(2); # die "Error in command line arguments\n";
+
+    my $i = 0;
+    # FIXME: Handle multiple files properly
+    while(<>) {
+        if ($i++ < $max_lines)  {
+            print;
+        } else {
+        store_line $_;
+        }
+    }
+    print "<...>\n" if @lines;
+    for my $line (@lines) {
+        print $line;
+    }
+}
+
+__END__
+
+=head1 NAME
+
+htail - output the first and the last part of files
+
+=head1 SYNOPSIS
+
+htail [options] [file]
+
+command | htail [options]
+
+=head1 DESCRIPTION
+
+Print the first and the last 10 lines of FILE to standard output. With
+more than one FILE, precede each with a header giving the file name.
+
+With no FILE, or when FILE is -, read standard input.
+
+=head1 OPTIONS
+
+=over 4
+
+=item B<-n>, B<--lines=NUM>
+
+output the first and the last NUM lines, instead of 10
+
+=back
+
+=cut
