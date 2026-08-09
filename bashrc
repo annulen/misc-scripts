@@ -6,6 +6,8 @@ HISTCONTROL=ignoredups:erasedups
 # https://unix.stackexchange.com/a/48116 "After trying this for a bit, I've actually found that running only history -a, without -c and -r, is better usability-wise... commands you run are available instantly in new shells even before exiting the current shell, but not in concurrently running shells. This way Arrow-Up still always selects the last-run commands of the current session, which I find much less confusing"
 PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
+export COMP_KNOWN_HOSTS_WITH_HOSTFILE=""
+
 
 # https://unix.stackexchange.com/a/125386
 function mkcd() {
@@ -24,4 +26,6 @@ export PS1='[\u@\h \W$(type __git_ps1 &>/dev/null && __git_ps1 " (%s)")]\$ '
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
 
-export JAVA_OPTS="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.systemlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel"
+export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=gasp -Dsun.java2d.xrender=true"
+#export _JAVA_OPTIONS="${_JAVA_OPTIONS} -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Djdk.gtk.version=3 -Dsun.java2d.uiScale=1.25"
+#export _JAVA_OPTIONS="${_JAVA_OPTIONS} -Dswing.defaultlaf=javax.swing.plaf.nimbus.NimbusLookAndFeel"
